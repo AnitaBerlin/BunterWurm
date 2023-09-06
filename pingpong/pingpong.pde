@@ -1,6 +1,8 @@
 float restX;
 float restY;
 
+float backgroundGrey = 100;
+
 float xSpeed = -5;
 float ySpeed = 2;
 
@@ -8,13 +10,13 @@ float score = 0;
 
 void setup() {
   fullScreen();
-  background(150);
+  background(backgroundGrey);
   restX = width/2;
   restY = height/2;
 };
 
 void draw() {
-  background(150);
+  background(backgroundGrey);
   
   text("Score: " + score, width/2, 50);
   
