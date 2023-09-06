@@ -12,7 +12,7 @@ void setup() {
   fullScreen();
   background(backgroundGrey);
   restX = width/5;
-  restY = height;
+  restY = height/2;
 };
 
 void draw() {
@@ -21,10 +21,10 @@ void draw() {
   textSize(50);
   text("Score: " + round(score), width/2 - 100, 50);
   
-  if ((restX + xSpeed) < 0) {
+  if ((restX + xSpeed) < 25) {
     xSpeed = xSpeed * -1;
   };
-  if ((restY + ySpeed) < 0 || (restY + ySpeed) > height) {
+  if ((restY + ySpeed) < 25 || (restY + 25) > height) {
     ySpeed = ySpeed * -1;
   };
   
