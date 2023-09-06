@@ -10,13 +10,13 @@ float score = 0;
 
 void setup() {
   fullScreen();
-  background(backgroundGrey);
+  background(80,0,50);
   restX = width/5;
   restY = height/2;
 };
 
 void draw() {
-  background(backgroundGrey);
+  background(80,0,50);
   
   textSize(50);
   text("Score: " + round(score), width/2 - 100, 50);
