@@ -11,8 +11,8 @@ float score = 0;
 void setup() {
   fullScreen();
   background(backgroundGrey);
-  restX = width/2;
-  restY = height/2;
+  restX = width/5;
+  restY = height;
 };
 
 void draw() {
