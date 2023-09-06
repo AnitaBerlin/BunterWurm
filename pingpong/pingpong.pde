@@ -18,7 +18,8 @@ void setup() {
 void draw() {
   background(backgroundGrey);
   
-  text("Score: " + score, width/2, 50);
+  textSize(50);
+  text("Score: " + round(score), width/2 - 100, 50);
   
   if ((restX + xSpeed) < 0) {
     xSpeed = xSpeed * -1;
