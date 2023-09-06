@@ -19,7 +19,7 @@ void draw() {
   background(80,0,50); // Setzt Hintergrund farbe
   
   textSize(50); //Setzt Textgröße
-  text("Score: " + round(score), width/2 - 100, 50);
+  text("Punktzahl: " + round(score), width/2 - 100, 50);
   
   if ((restX + xSpeed) < 25) { // verändert die Geschwindigkeit wenn der Ball die linke Wand trifft
     xSpeed = xSpeed * -1;
