@@ -48,5 +48,5 @@ void draw() {
 //rendert die Formen
   rect(100, mouseY - 50, 20, 100);
   rect(displayWidth - 100, restY - 50, 20, 100);
-  circle(restX, restY, 50);
+  rect(restX, restY, 50, 50);
 };
