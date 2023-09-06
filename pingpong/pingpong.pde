@@ -8,13 +8,13 @@ float score = 0;
 
 void setup() {
   fullScreen();
-  background(0);
+  background(150);
   restX = width/2;
   restY = height/2;
 };
 
 void draw() {
-  background(0);
+  background(150);
   
   text("Score: " + score, width/2, 50);
   
