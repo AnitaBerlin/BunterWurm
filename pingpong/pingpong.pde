@@ -8,12 +8,17 @@ float score = 0;
 // Neuer Ball
 Circle ball = new Circle(0, 0, -5, 2, 50);
 
+// Spieler-2 Plattform
+int playerTwoY;
+
 void setup() {
   fullScreen();
   background(background[0], background[1], background[2]);
 
   ball.posX = width/2;
   ball.posY = height/2;
+
+  playerTwoY = height/2;
 };
 
 void draw() {
@@ -24,6 +29,20 @@ void draw() {
   // Punktezahl
   textSize(50);
   text("Punktzahl: " + round(score), width/2 - 100, 50);
+
+  // Spieler Plattformen
+  if (keyPressed) {
+    if (keyCode == DOWN) {
+      if (playerTwoY < height) {
+        playerTwoY += 20;
+      };
+    };
+    if (keyCode == UP) {
+      if (playerTwoY > 0) {
+        playerTwoY -= 20;
+      };
+    };
+  };
 
   if (ball.tracer[0] == 0 && ball.tracer[1] == 0) {
 
@@ -96,7 +115,7 @@ void draw() {
       // Spieler-2 Plattform
       if (ball.xSpeed > 0) {
         if ((ball.posX + i) <= (width - 100) && (ball.posX + i) >= (width - 120)) {
-          if (ball.posY >= (ball.posY - 50) && ball.posY <= (ball.posY + 50)) {
+          if (playerTwoY >= (ball.posY - 50) && playerTwoY <= (ball.posY + 50)) {
             ball.lockMove = true;
             ball.tracer[0] = i-1;
             ball.xSpeed = ball.xSpeed * -1;
@@ -157,6 +176,6 @@ void draw() {
 
   // Die Formen werden gerendert
   rect(100, mouseY - 50, 20, 100);
-  rect(width - 100, ball.posY - 50, 20, 100);
+  rect(width - 100, playerTwoY - 50, 20, 100);
   circle(ball.posX, ball.posY, ball.diameter);
 };
