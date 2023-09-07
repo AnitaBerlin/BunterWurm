@@ -1,19 +1,15 @@
-float restX; // X-Koordinate für Ball und Gegnerplattform
-float restY; // Y-Koordinate für Ball und Gegnerplattform
-
 float backgroundGrey = 100; // Variable für den Hintergrund
 
-float xSpeed = -5; // Geschwindigkeit vom Ball für die X-Koordinate
-float ySpeed = 2; // Geschwindigkeit vom Ball für die Y-Koordinate
-
 float score = 0;
+
+Circle ball = new Circle(0, 0, -5, 2, 50);
 
 void setup() {
   fullScreen();
   background(80, 0, 50);
   
-  restX = width/2;
-  restY = height/2;
+  ball.posX = width/2;
+  ball.posY = height/2;
 };
 
 void draw() {
@@ -26,32 +22,32 @@ void draw() {
   text("Punktzahl: " + round(score), width/2 - 100, 50);
 
   // Dreht den Ball an der linken Wand um
-  if ((restX + xSpeed) < 25) {
-    xSpeed = xSpeed * -1;
+  if ((ball.posX + ball.xSpeed) < 25) {
+    ball.xSpeed = ball.xSpeed * -1;
   };
 
   // Dreht den Ball an der oberen und unteren Wand um
-  if ((restY + ySpeed) < 25 || (restY + 25) > height) {
-    ySpeed = ySpeed * -1;
+  if ((ball.posY + ball.ySpeed) < 25 || (ball.posY + 25) > height) {
+    ball.ySpeed = ball.ySpeed * -1;
   };
   
   // Der Ball trifft eine Plattform
-  if ((restX + xSpeed) > 100 && (restX + xSpeed) < 120 && (restY + ySpeed) > (mouseY - 50) && (restY + ySpeed) < (mouseY + 50) || (restX + xSpeed) > width - 120) { //Schaut ob der Ball eine Platform trifft
+  if ((ball.posX + ball.xSpeed) > 100 && (ball.posX + ball.xSpeed) < 120 && (ball.posY + ball.ySpeed) > (mouseY - 50) && (ball.posY + ball.ySpeed) < (mouseY + 50) || (ball.posX + ball.xSpeed) > width - 120) {
     
     // Der Ball trifft die Spielerplattform
-    if ((restX + xSpeed) > 100 && (restX + xSpeed) < 120 && (restY + ySpeed) > (mouseY - 50) && (restY + ySpeed) < (mouseY + 50)) score++;
+    if ((ball.posX + ball.xSpeed) > 100 && (ball.posX + ball.xSpeed) < 120 && (ball.posY + ball.ySpeed) > (mouseY - 50) && (ball.posY + ball.ySpeed) < (mouseY + 50)) score++;
     
     // Der Ball dreht an der Plattform um
-    xSpeed = xSpeed * -1;
+    ball.xSpeed = ball.xSpeed * -1;
     
     // Der Ball erhöht die Geschwindigkeit
-    if (sqrt(pow(xSpeed, 2)) < 20) { //der Ball wird schneller wenn er eine Platform trifft
-      if (xSpeed < 0) xSpeed --;
-      if (xSpeed > 0) xSpeed ++;
+    if (sqrt(pow(ball.xSpeed, 2)) < 20) { //der Ball wird schneller wenn er eine Platform trifft
+      if (ball.xSpeed < 0) ball.xSpeed --;
+      if (ball.xSpeed > 0) ball.xSpeed ++;
     };
-    if (sqrt(pow(ySpeed, 2)) < 20) {
-      if (ySpeed < 0) ySpeed --;
-      if (ySpeed > 0) ySpeed ++;
+    if (sqrt(pow(ball.ySpeed, 2)) < 20) {
+      if (ball.ySpeed < 0) ball.ySpeed --;
+      if (ball.ySpeed > 0) ball.ySpeed ++;
     };
     
     // Alle Objektfarben ändern sich
@@ -60,12 +56,11 @@ void draw() {
   
   
   // Der Ball bewegt sich
-  restX = restX + xSpeed;
-  restY = restY + ySpeed;
+  ball.posX = ball.posX + ball.xSpeed;
+  ball.posY = ball.posY + ball.ySpeed;
 
   // Die Formen werden gerendert
   rect(100, mouseY - 50, 20, 100);
-  rect(width - 100, restY - 50, 20, 100);
-  
-  circle(restX, restY, 50);
+  rect(width - 100, ball.posY - 50, 20, 100);
+  circle(ball.posX, ball.posY, ball.diameter);
 };
