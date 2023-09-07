@@ -32,12 +32,12 @@ void draw() {
 
   // Spieler Plattformen
   if (keyPressed) {
-    if (keyCode == DOWN) {
+    if (keyCode == DOWN || key == 's') {
       if (playerTwoY < height) {
         playerTwoY += 20;
       };
     };
-    if (keyCode == UP) {
+    if (keyCode == UP || key == 'w') {
       if (playerTwoY > 0) {
         playerTwoY -= 20;
       };
