@@ -1,5 +1,4 @@
 class Circle {
-
   int posX;
   int posY;
   int xSpeed;
@@ -8,15 +7,7 @@ class Circle {
   int[] tracer;
   boolean lockMove;
 
-  public Circle(
-
-    int posX,
-    int posY,
-    int xSpeed,
-    int ySpeed,
-    int diameter
-
-    ) {
+  public Circle(int posX, int posY, int xSpeed, int ySpeed, int diameter) {
     this.posX = posX;
     this.posY = posY;
     this.xSpeed = xSpeed;
