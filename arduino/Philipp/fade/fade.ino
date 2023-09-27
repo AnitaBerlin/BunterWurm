@@ -16,7 +16,6 @@
 int led = 3;         // the PWM pin the LED is attached to
 int brightness = 0;  // how bright the LED is
 int fadeAmount = 5;  // how many points to fade the LED by
-int incomingByte = 0; // for incoming serial data
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -26,9 +25,16 @@ void setup() {
 // the loop routine runs over and over again forever:
 void loop() {
 
-  int input = Serial.read();
+  // set the brightness of pin 9:
+  analogWrite(led, brightness);
 
-  analogWrite(led, Serial.parseInt());
+  // change the brightness for next time through the loop:
+  brightness = brightness + fadeAmount;
 
-  delay(1000);
+  // reverse the direction of the fading at the ends of the fade:
+  if (brightness <= 0 || brightness >= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  // wait for 30 milliseconds to see the dimming effect
+  delay(30);
 }
