@@ -9,7 +9,7 @@ void setup() {
 }
 
 void loop() {
-  if(Serial.available() > 1){
+  if(Serial.available() > 0){
     nowValue = Serial.parseInt();
     Serial.println(nowValue);
     analogWrite(PIN1, nowValue);
