@@ -18,24 +18,39 @@
 
 int ledPin = 11;  // LED connected to digital pin 9
 
+int incomingByte = 0; // for incoming serial data
+
 void setup() {
-  // nothing happens in setup
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
 }
 
 void loop() {
-  // fade in from min to max in increments of 5 points:
-  for (int fadeValue = 0; fadeValue <= 255; fadeValue += 5) {
-    // sets the value (range from 0 to 255):
-    analogWrite(ledPin, fadeValue);
-    // wait for 30 milliseconds to see the dimming effect
-    delay(30);
-  }
+  // send data only when you receive data:
+  if (Serial.available() > 0) {
+    // read the incoming byte:
+    incomingByte = Serial.parseInt();
 
-  // fade out from max to min in increments of 5 points:
-  for (int fadeValue = 255; fadeValue >= 0; fadeValue -= 5) {
-    // sets the value (range from 0 to 255):
-    analogWrite(ledPin, fadeValue);
-    // wait for 30 milliseconds to see the dimming effect
-    delay(30);
+    analogWrite(ledPin, incomingByte);
+  }
+  else {
+  analogWrite(ledPin, incomingByte);
   }
 }
+
+//void loop() {
+  // fade in from min to max in increments of 5 points:
+  //for (int fadeValue = 0; fadeValue <= 255; fadeValue += 5) {
+    // sets the value (range from 0 to 255):
+    //analogWrite(ledPin, fadeValue);
+    // wait for 30 milliseconds to see the dimming effect
+    //delay(30);
+  //}
+
+  // fade out from max to min in increments of 5 points:
+  //for (int fadeValue = 255; fadeValue >= 0; fadeValue -= 5) {
+    // sets the value (range from 0 to 255):
+    //analogWrite(ledPin, fadeValue);
+    // wait for 30 milliseconds to see the dimming effect
+    //delay(30);
+  //}
+//}
