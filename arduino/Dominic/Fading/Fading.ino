@@ -5,10 +5,19 @@ bool increase = 1;
 
 void setup() {
   pinMode(PIN1, OUTPUT);
-
+  digitalWrite(PIN1, 0);
 }
 
 void loop() {
+  if(Serial.available() > 1){
+    nowValue = Serial.parseInt();
+    Serial.println(nowValue);
+    analogWrite(PIN1, nowValue);
+  }
+}
+
+void fade()
+{
   analogWrite(PIN1, nowValue);
   if(nowValue <= 0)
   {
@@ -25,5 +34,4 @@ void loop() {
   }
   delay(10);
   Serial.println(nowValue);
-
 }
