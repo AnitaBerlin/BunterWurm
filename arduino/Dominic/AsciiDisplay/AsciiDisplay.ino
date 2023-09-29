@@ -29,165 +29,77 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 #define WHITE 0x7
 
 int thisByte = 33;
-int moveRight = 0;
+int move = 0;
 double nowTime = 0;
 
 
 void setup() {
   // Debugging output
   Serial.begin(9600);
-  // set up the LCD's number of columns and rows: 
-  lcd.begin(16, 2);
-  lcd.setBacklight(WHITE);
+  // set up the LCD's number of columns and rows:
+  lcd.begin(16, 2); //Die Zeilen und Reihen werden gesetzt
+  lcd.setBacklight(WHITE); //Die Hintergrundsfarbe wird gesetzt
 }
 
-uint8_t i=0;
+uint8_t i = 0;
 void loop() {
-  lcd.setCursor(0, 0);
-  uint8_t buttons = lcd.readButtons();
-  //if(millis()-200 >= nowTime)
-  //{
-  //  lcd.clear();
-  //  nowTime = millis();
-  //}
-  lcd.print("ASCII Table");
-  lcd.setCursor(0, 1);
+  uint8_t buttons = lcd.readButtons();//Die Zustände der Knöpfe werden eingelesen
 
-
-  if (buttons) {
-    //lcd.clear();
-    lcd.setCursor(0,0);
-    if (buttons & BUTTON_UP) {
-      
-      //lcd.setBacklight(0x4A);
+  if (buttons) {//Wenn ein Knopf gedrückt ist
+    lcd.setCursor(0, 0);//Der Cursor wird nach 0, 0 gesetzt
+    if (buttons & BUTTON_UP) {//Wenn der Knopf gedrückt wird, wird alles "gecleared" und der Zähler (thisByte) wird um eins erhöht
       lcd.clear();
       lcd.print("ASCII Table");
-      lcd.setCursor(0,1);
       thisByte++;
-      if(thisByte > 126)
-      {
+      if (thisByte > 126) {//Zum reguliren der Obergrenze
         thisByte = 126;
       }
-      Serial.println(thisByte);
-      lcd.print(char(thisByte));
-      lcd.print(", dec: ");
-      lcd.print(thisByte);
-      moveRight = 0;
-      //lcd.print(", hex: ");
-      //lcd.print(thisByte, HEX);
-      //lcd.print(", oct: ");
-      //lcd.print(thisByte, OCT);
-      //lcd.print(", bin: ");
-      //lcd.println(thisByte, BIN);
+      move = 0;
     }
-    if (buttons & BUTTON_DOWN) {
+    if (buttons & BUTTON_DOWN) {//Wenn der Knopf gedrückt wird, wird alles "gecleared" und der Zähler (thisByte) wird um eins gesenkt
       lcd.clear();
       lcd.print("ASCII Table");
-      lcd.setCursor(0,1);
       thisByte--;
-      if(thisByte < 33)
-      {
+      if (thisByte < 33) {//Zum reguliren der Untergrenze
         thisByte = 33;
       }
-      Serial.println(thisByte);
-      lcd.print(char(thisByte));
-      lcd.print(", dec: ");
-      lcd.print(thisByte);
-      moveRight = 0;
-      //lcd.print(", hex: ");
-      //lcd.print(thisByte, HEX);
-      //lcd.print(", oct: ");
-      //lcd.print(thisByte, OCT);
-      //lcd.print(", bin: ");
-      //lcd.println(thisByte, BIN);
+      move = 0;
     }
-    if (buttons & BUTTON_LEFT) {
-      moveRight--;
+    if (buttons & BUTTON_LEFT) {//Der Zähler move um eins gesenkt
+      move--;
       lcd.clear();
-      lcd.setCursor(0,1);
-
-      if(moveRight < 0)
-      {
-        moveRight = 0;
-      }
-
-      switch(moveRight)
-      {
-        case 0:
-          lcd.print(char(thisByte));
-          lcd.print(", dec: ");
-          lcd.print(thisByte);
-          break;
-        case 1:
-          lcd.print(", hex: ");
-          lcd.print(thisByte, HEX);
-          break;
-        case 2:
-          lcd.print(", oct: ");
-          lcd.print(thisByte, OCT);
-          break;
-        case 3:
-          lcd.print(", bin: ");
-          lcd.println(thisByte, BIN);
-          break;
+      if (move < 0) {//Zum reguliren der Untergrenze
+        move = 0;
       }
     }
-    if (buttons & BUTTON_RIGHT) {
-      moveRight++;
+    if (buttons & BUTTON_RIGHT) {//Der Zähler move um eins erhöht
+      move++;
       lcd.clear();
-      lcd.setCursor(0,1);
-
-      if(moveRight > 3)
-      {
-        moveRight = 3;
+      if (move > 3) {//Zum reguliren der Obergrenze
+        move = 3;
       }
-
-      switch(moveRight)
-      {
-        case 0:
-          lcd.print(char(thisByte));
-          lcd.print(", dec: ");
-          lcd.print(thisByte);
-          break;
-        case 1:
-          lcd.print(", hex: ");
-          lcd.print(thisByte, HEX);
-          break;
-        case 2:
-          lcd.print(", oct: ");
-          lcd.print(thisByte, OCT);
-          break;
-        case 3:
-          lcd.print(", bin: ");
-          lcd.println(thisByte, BIN);
-          break;
-      }
+    }
+    lcd.setCursor(0, 0);
+    lcd.print("ASCII Table");
+    lcd.setCursor(0, 1);
+    switch (move) {//Hier wird geguckt welcher zustand gerade ist, also ob man nach rechts oder links gehen will
+      case 0:
+        lcd.print(char(thisByte));
+        lcd.print(", dec: ");
+        lcd.print(thisByte);
+        break;
+      case 1:
+        lcd.print(", hex: ");
+        lcd.print(thisByte, HEX);
+        break;
+      case 2:
+        lcd.print(", oct: ");
+        lcd.print(thisByte, OCT);
+        break;
+      case 3:
+        lcd.print(", bin: ");
+        lcd.println(thisByte, BIN);
+        break;
     }
   }
 }
-
-
-//void createAsciiTable()
-//{
-//  for(int i = 33; i < 126; i++)
-//  {
-//    asciiTable[i] = {String(byte(thisByte))};// + ", dec: " + thisByte};
-//    Serial.println(asciiTable[i]);
-//  }
-  
-  //Serial.write(thisByte);
-  //Serial.print(", dec: ");
-  //Serial.print(thisByte);
-  //Serial.print(", hex: ");
-  //Serial.print(thisByte, HEX);
-  //Serial.print(", oct: ");
-  //Serial.print(thisByte, OCT);
-  //Serial.print(", bin: ");
-  //Serial.println(thisByte, BIN);
-  //if (thisByte == 126) {
-  //  while (true) {
-  //    continue;
-  //  }
-  //}
-  //thisByte++;
-//}

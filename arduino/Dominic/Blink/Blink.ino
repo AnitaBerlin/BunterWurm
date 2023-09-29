@@ -40,10 +40,10 @@ void loop() {
 
 void changeBlink()
 {
-  if(millis() - 500 >= nowTime){
-    digitalWrite(LED1, !digitalRead(LED1));
-    digitalWrite(LED2, !digitalRead(LED2));
-    nowTime = millis();
+  if(millis() - 500 >= nowTime){ //Hier wird überprüft op seit dem letzten mal 500ms vergangen sind
+    digitalWrite(LED1, !digitalRead(LED1)); //LED1 wird ausgeschaltet
+    digitalWrite(LED2, !digitalRead(LED2)); //LED2 wird ausgeschaltet
+    nowTime = millis(); //Die jetzige Zeit wird abgespeichert um beim nächsten mal die vergangende Zeit zu überprüfen
   }
 }
 
