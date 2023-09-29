@@ -1,3 +1,11 @@
+/*
+  # Display temperature for Adafruit lcd LED
+  # 
+  # Author: Philipp Ackermann
+  # Date: 29.09.2023
+*/
+
+
 // Include the libraries we need
 #include <OneWire.h>
 #include <DallasTemperature.h>
@@ -35,6 +43,7 @@ void setup(void)
   // Start up the library
   sensors.begin();
 
+  // Start up the lcd display
   lcd.begin(16, 2);
   lcd.setBacklight(WHITE);
 }
@@ -53,8 +62,10 @@ void loop(void)
   // We use the function ByIndex, and as an example get the temperature from the first sensor only.
   float tempC = sensors.getTempCByIndex(0);
 
+  // Print temperatur in serial monitor
   Serial.println(tempC);
 
+  // Print temperature on display
   lcd.print("Temp: ");
   lcd.print(tempC);
   lcd.print(" C");
