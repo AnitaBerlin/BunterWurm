@@ -1,11 +1,14 @@
-/*********************
+/*
+  ASCII table on Display
 
-Example code for the Adafruit RGB Character LCD Shield and Library
+  This example shows how to show the ASCII table from the expamplestab on a connected Display
 
-This code displays text on the shield, and also reads the buttons on the keypad.
-When a button is pressed, the backlight changes color.
+  The circuit:
+  - Display attached via ports SV, 2, 3 and GRD.
 
-**********************/
+  created 27 September 2023
+  by Florian Meyhak
+*/
 
 // include the library code:
 #include <Wire.h>
@@ -28,23 +31,22 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 #define VIOLET 0x5
 #define WHITE 0x7
 
-int thisByte = 33;
-int curs = 0;
-int x=0;
+int thisByte = 33; //Defines Variable that will run through all the numbers from 33 to 126
+int x=0; // Sets the Variable x to 0. x will be the column counter for the cursor
 
 void setup() {
-  Serial.begin(9600);
-  // set up the LCD's number of columns and rows: 
-  lcd.begin(55, 2);
-  lcd.setBacklight(WHITE);
+  Serial.begin(9600); // opens serial port, sets data rate to 9600 bps
+  lcd.begin(55, 2); // Sets Display-width and -length (55 columns, 2 rows)
+  lcd.setBacklight(WHITE); // Sets the background to White
 }
 
 void loop() {
-  // set the cursor to column 0, line 1
-  // (note: line 1 is the second row, since counting begins with 0):
 
   uint8_t buttons = lcd.readButtons();
 
+// If the Display shows the top of the table, the Display wont change even if
+// we keep pressing the up Button.
+// Also sets the Counter to 33 everytime.
 if (thisByte <= 32) {
   lcd.setCursor(x, 0);
   lcd.print("ASCII Table - Character Map");
@@ -61,6 +63,8 @@ if (thisByte <= 32) {
   lcd.print(thisByte+1, BIN);
   thisByte = 33;
 }
+//If not on top of the table show the ASCII tablerow of counter-1 in top row of the Display
+//and the tablerow of the counter in bottom row of the Display.
 else {
   lcd.setCursor(x, 0);
   if (thisByte == 33) {
@@ -93,12 +97,12 @@ else {
   
   if (buttons) {
     lcd.clear();
-    
+
     if (buttons & BUTTON_DOWN) {
-      thisByte = thisByte +1;
+      thisByte = thisByte +1; //If button down is pushed, count one up
     }
     if (buttons & BUTTON_UP) {
-      thisByte = thisByte -1;
+      thisByte = thisByte -1; //If butoon up is pushed, count one down
     }
     if (buttons & BUTTON_LEFT) {
       x++;
