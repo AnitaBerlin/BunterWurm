@@ -1,8 +1,8 @@
 /*
-  # ASCII Tabelle für Arduino Display
+  # ASCII table for Arduino display
   #
   # Author: Philipp Ackermann
-  # Datum: 29.09.2023
+  # Date: 29.09.2023
 */
 
 // Import Adafruit library
