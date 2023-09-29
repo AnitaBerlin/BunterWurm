@@ -1,4 +1,5 @@
 import processing.serial.*;
+PrintWriter output;
 
 Serial myPort;
 String val;
@@ -12,6 +13,7 @@ void setup()
 {
   String portName = Serial.list()[1];
   myPort = new Serial(this, portName, 9600);
+  output = createWriter("tempLog.txt");
   
   fullScreen();
 }
@@ -23,6 +25,8 @@ void draw() {
     return;
   } else println(val);
   
+  // draw graph
+  
   line(50, 0, 50, height - 50);
   line(50, height - 50, width, height - 50);
   
@@ -33,8 +37,13 @@ void draw() {
   
   if (lastVal != 0) line(lastTime, height - (lastVal-20)*50, newTime, height - (parseFloat(val)-20)*50);
   
+  // save data to file
+  output.println(val);
+  
   lastTime ++;
   newTime ++;
   
   lastVal = parseFloat(val);
+  
+  output.flush();
 }
