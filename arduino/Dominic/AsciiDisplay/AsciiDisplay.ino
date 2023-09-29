@@ -58,6 +58,8 @@ void loop() {
     //lcd.clear();
     lcd.setCursor(0,0);
     if (buttons & BUTTON_UP) {
+      
+      //lcd.setBacklight(0x4A);
       lcd.clear();
       lcd.print("ASCII Table");
       lcd.setCursor(0,1);
