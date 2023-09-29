@@ -46,6 +46,7 @@ void setup(void)
   // Start up the lcd display
   lcd.begin(16, 2);
   lcd.setBacklight(WHITE);
+  lcd.print("Temp: ");
 }
 
 /*
@@ -66,8 +67,10 @@ void loop(void)
   Serial.println(tempC);
 
   // Print temperature on display
-  lcd.print("Temp: ");
+  
   lcd.print(tempC);
   lcd.print(" C");
-  lcd.clear();
+
+  delay(500);
+  lcd.setCursor(6, 0);
 }
