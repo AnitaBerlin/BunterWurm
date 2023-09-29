@@ -1,7 +1,8 @@
 import processing.serial.*;
-
-Serial myPort;            //
-String val;               //
+Table table;
+PrintWriter output;
+Serial myPort;            
+String val;              
 
 static float sensorVal = 0;  //
 int sek = 50;                //
@@ -11,9 +12,13 @@ float lastVal=0;            //
 void setup()
 {
   size(600,600);          //
-  background(255);         //
+  background(255);
+  output = createWriter("Temperatur.txt"); //
   String portName = Serial.list()[1]; //change the 0 to a 1 or 2 etc. to match your port
   myPort = new Serial(this, portName, 9600);  //
+  
+  output.println("Zeit:                            Wert:");
+
 }
 
 
@@ -23,6 +28,11 @@ void draw() {
   if (val == null) {                    //
     return;
   } else println(val);
+  
+  output.print(new java.util.Date());
+  output.print("    ");
+  output.print(val);
+  
 
   line(50, 0, 50, height - 50);                    //
   line(50, height - 50, width, height - 50);
@@ -38,4 +48,6 @@ void draw() {
   newsek ++;
 
   lastVal = parseFloat(val);
+  
+  output.flush();
 }

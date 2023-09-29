@@ -5,14 +5,14 @@ bool increase = 1;
 
 void setup() {
   pinMode(PIN1, OUTPUT);
-  digitalWrite(PIN1, 0);
+  digitalWrite(PIN1, 0); //Die LED wird zu Beginn einmal ausgeschaltet
 }
 
 void loop() {
   if(Serial.available() > 0){
-    nowValue = Serial.parseInt();
-    Serial.println(nowValue);
-    analogWrite(PIN1, nowValue);
+    nowValue = Serial.parseInt(); //List den eingegebenen Wert aus
+    Serial.println(nowValue); //Hier wird dieser Wert einmal ausgegeben zum debuggen
+    analogWrite(PIN1, nowValue); //Der Wert wird als output genutzt um die Heligkeit der LED zu verändern
   }
 }
 
