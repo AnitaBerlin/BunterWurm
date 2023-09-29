@@ -1,5 +1,5 @@
 import processing.serial.*;   
-Table table;
+
 PrintWriter output;
 Serial myPort;            
 String val;              
@@ -17,8 +17,6 @@ void setup()
   String portName = Serial.list()[1]; //match your port
   myPort = new Serial(this, portName, 9600);  //put in the port
   
-  output.println("Zeit:                            Wert:");    //print the header in the document
-
 }
 
 
@@ -29,9 +27,8 @@ void draw() {
     return;
   } else println(val);
   
-  output.print(new java.util.Date());  //put the data in the document
-  output.print("    ");
-  output.print(val);
+
+  output.println(val);
   
 
   line(50, 0, 50, height - 50);                    //make the graph scales

@@ -1,8 +1,20 @@
+/*
+  Temperature Arduino to Processing
+
+  This example shows how to prepare the measured temperatures for processing to access them.
+
+  The circuit:
+  - Temperature measurement system attached via port 7.
+
+  created 29 September 2023
+  by Florian Meyhak
+*/
+
 // Include the libraries we need
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-// Data wire is plugged into port 2 on the Arduino
+// Data wire is plugged into port 7 on the Arduino
 #define ONE_WIRE_BUS 7
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
