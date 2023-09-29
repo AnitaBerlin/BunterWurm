@@ -1,4 +1,5 @@
 import processing.serial.*;
+Table table;
 PrintWriter output;
 Serial myPort;            
 String val;              
@@ -15,6 +16,9 @@ void setup()
   output = createWriter("Temperatur.txt"); //
   String portName = Serial.list()[1]; //change the 0 to a 1 or 2 etc. to match your port
   myPort = new Serial(this, portName, 9600);  //
+  
+  output.println("Zeit:                            Wert:");
+
 }
 
 
@@ -25,7 +29,10 @@ void draw() {
     return;
   } else println(val);
   
-  output.println(val); // Write the data to the file
+  output.print(new java.util.Date());
+  output.print("    ");
+  output.print(val);
+  
 
   line(50, 0, 50, height - 50);                    //
   line(50, height - 50, width, height - 50);
