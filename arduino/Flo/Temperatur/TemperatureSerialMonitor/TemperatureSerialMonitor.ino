@@ -1,8 +1,20 @@
+/*
+  Temperature serial monitor
+
+  This example shows how to show the measured temperature in the serial monitor
+
+  The circuit:
+  - Temperature measurement system attached via port 7.
+
+  created 29 September 2023
+  by Florian Meyhak
+*/
+
 // Include the libraries we need
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-// Data wire is plugged into port 2 on the Arduino
+// Data wire is plugged into port 7 on the Arduino
 #define ONE_WIRE_BUS 7
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
@@ -38,10 +50,10 @@ void loop(void)
   // Check if reading was successful
   if(tempC != DEVICE_DISCONNECTED_C) 
   {
-    Serial.println(tempC);
+    Serial.println(tempC); // puts measured temperatures into serial monitor
   } 
   else
   {
-    Serial.println("Error: Could not read temperature data");
+    Serial.println("Error: Could not read temperature data");// puts out error warning
   }
 }
