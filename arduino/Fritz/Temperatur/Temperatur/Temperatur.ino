@@ -63,4 +63,6 @@ void loop(void){
     }
   }
     delay(1000);
+
+    Serial.println(sensors.getTempCByIndex(0)); 
 }
