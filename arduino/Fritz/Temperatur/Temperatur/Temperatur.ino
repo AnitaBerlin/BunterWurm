@@ -44,5 +44,23 @@ void loop(void){
   lcd.print(sensors.getTempCByIndex(0)); 
  // Serial.print(" - Fahrenheit temperature: ");
  // Serial.println(sensors.getTempFByIndex(0));
-  delay(1000);
+
+
+  uint8_t buttons = lcd.readButtons();
+  if (buttons) 
+  {
+    if (buttons & BUTTON_UP) {
+        lcd.setBacklight(RED);
+    }
+    if (buttons & BUTTON_DOWN) {
+        lcd.setBacklight(YELLOW);
+    }
+    if (buttons & BUTTON_LEFT) {
+        lcd.setBacklight(GREEN);
+    }
+    if (buttons & BUTTON_RIGHT) {
+        lcd.setBacklight(VIOLET);
+    }
+  }
+    delay(1000);
 }
