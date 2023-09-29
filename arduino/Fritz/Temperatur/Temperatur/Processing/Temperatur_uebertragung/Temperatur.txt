@@ -1,0 +1,6 @@
+Zeit:                            Wert:
+Fri Sep 29 14:06:10 CEST 2023    25.69
+Fri Sep 29 14:06:10 CEST 2023    25.62
+Fri Sep 29 14:06:11 CEST 2023    25.62
+Fri Sep 29 14:06:11 CEST 2023    25.62
+Fri Sep 29 14:06:12 CEST 2023    25.62
