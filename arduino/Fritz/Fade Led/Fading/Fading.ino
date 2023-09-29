@@ -1,5 +1,9 @@
+//Author: Florian Fritz Wiede
+//Date: 29/09/2023
+//Name: Fading
+
 int ledPin = 9;  // LED connected to digital pin 9
-int ledPin = 5;  // LED connected to digital pin 9
+int ledPin1 = 5;  // LED connected to digital pin 5
 
 
 void setup() {
@@ -24,6 +28,8 @@ void loop() {
     delay(30);
   }
   int input = Serial.read();
-
+  // checks input and set the LED power to that input
     analogWrite(ledPin, Serial.parseInt());
     delay(1000);
+
+}
