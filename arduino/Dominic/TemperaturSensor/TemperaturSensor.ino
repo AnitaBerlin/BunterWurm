@@ -36,7 +36,7 @@ void loop(void){
   // Call sensors.requestTemperatures() to issue a global temperature and Requests to all devices on the bus
   sensors.requestTemperatures(); 
   
-  lcd.print(sensors.getTempCByIndex(0));
+  lcd.print(sensors.getTempCByIndex(0));//"Printed" die Temperatur auf dem Display
   Serial.println(sensors.getTempCByIndex(0));
   delay(1000);
 }
