@@ -1,7 +1,7 @@
 /*
-  Temperature text file
+  Temperature txt file tablet foramt
 
-  This example shows how to show the measured temperature in a text file
+  This example shows how to show the measured temperature in a table in a txt file
 
   created 29 September 2023
   by Florian Meyhak
@@ -9,15 +9,17 @@
 
 //import the required librarys
 import processing.serial.*;
+
 PrintWriter output;//sets up the file commands
 Serial myPort;//creates new serial that reads the port
 String value;//creates String for measured temperatures
 
 
 void setup() {
-  output = createWriter("temp.txt"); //creates the txt file for the temperatures
+  output = createWriter("temptable.txt"); //creates the txt file for the temperatures
   String portName=Serial.list()[1];//defines which port is being used
   myPort =new Serial(this, portName, 9600);//connects myport to portName
+  output.println("Zeit:                             Wert:"); //creates first row of table
 }
 
 void draw() {
@@ -31,8 +33,13 @@ void draw() {
    println(value); 
   }
   
-  output.println(value);//if there is a temperature value print it into the txt file
+  //prints all other rows. first the date and then the values
+  output.print(new java.util.Date()); 
+  output.print("     ");
+  output.print(value);
+  
 }
+
 
 //if any key ist pressed...
 void keyPressed() {

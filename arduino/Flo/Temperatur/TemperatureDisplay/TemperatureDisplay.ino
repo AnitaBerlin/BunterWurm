@@ -1,3 +1,16 @@
+/*
+  Temperature Display
+
+  This example shows how to show the measured temperature on a connected Display
+
+  The circuit:
+  - Display attached via ports SV, 2, 3 and GRD.
+  - Temperature measurement system attached via port 7.
+
+  created 29 September 2023
+  by Florian Meyhak
+*/
+
 // Include the libraries we need
 #include <OneWire.h>
 #include <DallasTemperature.h>
@@ -5,7 +18,7 @@
 #include <Adafruit_RGBLCDShield.h>
 #include <utility/Adafruit_MCP23017.h>
 
-// Data wire is plugged into port 2 on the Arduino
+// Data wire is plugged into port 7 on the Arduino
 #define ONE_WIRE_BUS 7
 
 // The shield uses the I2C SCL and SDA pins. On classic Arduinos
@@ -36,7 +49,6 @@ void setup(void)
 {
   // start serial port
   Serial.begin(9600);
-  Serial.println("Dallas Temperature IC Control Library Demo");
 
   // Start up the library
   sensors.begin();
@@ -57,7 +69,7 @@ void loop(void)
 
   // call sensors.requestTemperatures() to issue a global temperature 
   // request to all devices on the bus
-  lcd.setCursor(0, 0);
+  lcd.setCursor(0, 0); // Write in top row
   lcd.print("Temperature:");
 
   sensors.requestTemperatures(); // Send the command to get temperatures
@@ -69,11 +81,11 @@ void loop(void)
   // Check if reading was successful
   if(tempC != DEVICE_DISCONNECTED_C) 
   {
-    lcd.setCursor(0, 1);
-    lcd.print(tempC);
+    lcd.setCursor(0, 1); //Write in bottom row
+    lcd.print(tempC); //put in measure temperatures
   } 
   else
   {
-    lcd.print("Error: Could not read temperature data");
+    lcd.print("Error: Could not read temperature data"); //give out error warning
   }
 }
