@@ -20,10 +20,7 @@ Adafruit_RGBLCDShield lcd = Adafruit_RGBLCDShield();
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
-  while (!Serial) {
-    ;  // wait for serial port to connect. Needed for native USB port only
-  }
+Serial.begin(9600);
  lcd.print("ASCII Table");
  lcd.begin(55, 2);
  // lcd.setCursor(posx, posy);
@@ -41,6 +38,11 @@ void setup() {
 
 
 void loop() {
+  
+
+  
+
+
   uint8_t buttons = lcd.readButtons();
   if (buttons) 
   {
@@ -51,12 +53,18 @@ void loop() {
       thisByte--;
       Serial.println(thisByte);
       moveRight = 0;
+      if (thisByte < 33) {
+        thisByte = 33;
+  }
     }
     if (buttons & BUTTON_DOWN) {
       Serial.println(thisByte);
       thisByte++;
       Serial.println(thisByte);
       moveRight = 0;
+      if (thisByte > 126) {
+        thisByte = 126;
+  }
     }
     if (buttons & BUTTON_LEFT) {
       moveRight--;
